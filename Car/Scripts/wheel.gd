@@ -135,8 +135,7 @@ func _get_wheel_angular_velocity(ray: RayCast3D,delta: float):
 		if wheel_brake_torque[wheel_index] > 0 and sign(wheel_angular_velocity[wheel_index]) != prev_sign:
 			wheel_angular_velocity[wheel_index] = 0.0
 			
-	if abs(wheel_angular_velocity[wheel_index]) < 0.1:
-		wheel_angular_velocity[wheel_index] = 0.0
+
 		
 		
 		

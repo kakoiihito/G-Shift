@@ -42,11 +42,22 @@ extends Resource
 @export_group("Brake")
 @export var max_brake_torque = 41.0
 
+
+@export_group("Assists")
+
 @export_subgroup("ABS")
 @export var ABS = false
 @export var ABS_Rate: float
+@export var abs_slip_threshold = -0.15
+@export var abs_decay_rate = -25.0
 
+@export_subgroup("TC")
+@export var TC = false
+@export var tc_slip_threshold = 0.12 
+@export var tc_decay_rate = -20.0     
 
+@export_subgroup("Stability")
+var Stability = false
 
 	####################
 	# ENGINE VARIABLES #

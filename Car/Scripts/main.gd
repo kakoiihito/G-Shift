@@ -17,6 +17,7 @@ var WheelProcessScript = load("res://Car/Scripts/wheel.gd")
 var MotorScript = load("res://Car/Scripts/motor.gd")
 var BrakeScript = load("res://Car/Scripts/brake.gd")
 var InputFeedbackScript = load("res://Car/Scripts/input_feedback.gd")
+var AssistsScript = load("res://Car/Scripts/assists.gd")
 
 var Steering = SteeringScript.new()
 var Transmission = TransmissionScript.new()
@@ -25,6 +26,7 @@ var WheelProcess = WheelProcessScript.new()
 var Motor = MotorScript.new()
 var Brake = BrakeScript.new()
 var InputFeedback = InputFeedbackScript.new()
+var Assists = AssistsScript.new()
 
 	##########
 	# WHEELS #
@@ -47,7 +49,7 @@ var InputFeedback = InputFeedbackScript.new()
 
 func _ready() -> void:
 	
-	var Processes = [Suspension, Transmission, Steering, WheelProcess, Motor, Brake]
+	var Processes = [Suspension, Transmission, Steering, WheelProcess, Motor, Brake, Assists]
 	var Wheels = [fl_wheel, fr_wheel, rl_wheel, rr_wheel]
 	
 	for i in range(Processes.size()):
@@ -74,4 +76,6 @@ func _physics_process(delta: float) -> void:
 	
 	InputFeedback._input_feedback()
 	Motor.motor_process(delta) # relies on wheel ang and forces functions
-	Brake.brake_proccess(delta) #relies on wheel angular velocity function
+	Brake.brake_proccess() #relies on wheel angular velocity function
+	
+	Assists.abs_proccess(delta)

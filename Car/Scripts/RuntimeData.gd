@@ -7,6 +7,7 @@ var wheel_spring_force = [Vector3(), Vector3(), Vector3(), Vector3()]
 var compression = [0.0, 0.0, 0.0, 0.0]
 
 var wheel_brake_torque = [0.0, 0.0, 0.0, 0.0]
+var abs_active = [false, false, false, false]
 var active_wheels_brake: int
 
 var wheel_engine_torque = [0.0, 0.0, 0.0, 0.0]
