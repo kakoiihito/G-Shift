@@ -1,22 +1,22 @@
 extends Node
 
-var wheel_spring_force = Data.wheel_spring_force
+
 var weak_reference_force   = 1000.0
 var strong_reference_force = 2800.0
 var wheel_spring_force_prev: Array = [0.0, 0.0, 0.0, 0.0]
 
-func _input_feedback():
+func _input_feedback(Data: RuntimeData.suspension):
 	# FL=0, FR=1, RL=2, RR=3 (adjust indices to match your setup)
-	var left_delta  = abs(wheel_spring_force[0].length() - wheel_spring_force_prev[0]) \
-					+ abs(wheel_spring_force[2].length() - wheel_spring_force_prev[2])
-	var right_delta = abs(wheel_spring_force[1].length() - wheel_spring_force_prev[1]) \
-					+ abs(wheel_spring_force[3].length() - wheel_spring_force_prev[3])
+	var left_delta  = abs(Data.wheel_spring_force[0].length() - wheel_spring_force_prev[0]) \
+					+ abs(Data.wheel_spring_force[2].length() - wheel_spring_force_prev[2])
+	var right_delta = abs(Data.wheel_spring_force[1].length() - wheel_spring_force_prev[1]) \
+					+ abs(Data.wheel_spring_force[3].length() - wheel_spring_force_prev[3])
 
 	left_delta  /= 2.0
 	right_delta /= 2.0
 
 	for i in range(4):
-		wheel_spring_force_prev[i] = wheel_spring_force[i].length()
+		wheel_spring_force_prev[i] = Data.wheel_spring_force[i].length()
 
 
 

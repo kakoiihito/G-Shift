@@ -1,12 +1,10 @@
 extends Node
 
-@export var car: RigidBody3D
-@onready var Values: Resource
 
-func _ready() -> void:
-	Values = car.VehicleValues
 
-func transmission_process(delta: float):
+
+
+func transmission_process(delta: float, Data: RuntimeData.transmission, Values: Resource):
 	var target_clutch = Input.get_action_strength("Clutch")
 
 

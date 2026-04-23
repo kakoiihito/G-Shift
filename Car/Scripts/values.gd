@@ -34,7 +34,8 @@ extends Resource
 @export var steering_ratio = 15.0
 @export var tire_turn_speed = 3.0
 @export var steering_stiffness = 20000
-
+@export var speed_factor_coeff = 0.03
+@export var ackermann_factor = 0.8 
 	###################
 	# BRAKE VARIABLES #
 	###################
@@ -80,6 +81,7 @@ var Stability = false
 @export var friction_c0 = 15.0
 @export var friction_c1 = 20.0
 @export var friction_c2 = 25.0
+@export var torque_curve: Curve
 
 	#################
 	# LSD VARIABLES #

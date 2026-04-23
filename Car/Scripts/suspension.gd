@@ -1,12 +1,11 @@
 extends Node
 
-@export var car: RigidBody3D
-@onready var Values: Resource
 
-var wheel_spring_force = Data.wheel_spring_force
-var compression = [0.0, 0.0, 0.0, 0.0]
 
-func suspension_proccess(ray: RayCast3D):
+
+
+
+func suspension_proccess(ray: RayCast3D, Data: RuntimeData.suspension, car: RigidBody3D, Values: Resource):
 	var arb_force = [0.0, 0.0, 0.0, 0.0]
 	var wheel_index = ray.get_meta("wheel_index")
 	
@@ -33,7 +32,7 @@ func suspension_proccess(ray: RayCast3D):
 
 		var damper_ratio = 0.7
 		
-		var world_vel = _get_point_velocity(hit)
+		var world_vel = _get_point_velocity(hit, car)
 		var relative_vel = up_dir_spring.dot(world_vel)
 		
 		var sprung_mass = car.mass * Values.weight_distribution[wheel_index]
@@ -43,15 +42,15 @@ func suspension_proccess(ray: RayCast3D):
 		
 		var spring_force = Values.spring_stiffness[wheel_index] * Data.compression[wheel_index]
 		var wheel_force_area = hit - car.global_position
-		wheel_spring_force[wheel_index] = (spring_force - spring_dampning + arb_force[wheel_index]) * up_dir_spring
+		Data.wheel_spring_force[wheel_index] = (spring_force - spring_dampning + arb_force[wheel_index]) * up_dir_spring
 
 		
 		wheels[wheel_index].position.y = -Data.compression[wheel_index]
-		car.apply_force(wheel_spring_force[wheel_index], wheel_force_area)
+		car.apply_force(Data.wheel_spring_force[wheel_index], wheel_force_area)
 	else:
 		Data.compression[wheel_index] = 0.0
 		wheels[wheel_index].position.y = 0.0
 		
 		
-func _get_point_velocity(point: Vector3) -> Vector3:
+func _get_point_velocity(point: Vector3, car: RigidBody3D) -> Vector3:
 	return car.linear_velocity + car.angular_velocity.cross(point - car.global_position)
