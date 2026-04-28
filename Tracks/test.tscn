@@ -27,10 +27,6 @@ albedo_color = Color(0, 1, 1, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_37kl0"]
 material = SubResource("StandardMaterial3D_yhjd6")
 
-[sub_resource type="Curve" id="Curve_yhjd6"]
-_data = [Vector2(0, 0.30337083), 0.0, 1.8258431, 0, 0, Vector2(0.08, 0.44943827), 0.0, 0.0, 0, 0, Vector2(0.1657143, 0.55056185), 0.0, 0.0, 0, 0, Vector2(0.24571428, 0.6966293), 0.0, 0.0, 0, 0, Vector2(0.3257143, 0.79775286), 0.0, 0.0, 0, 0, Vector2(0.41714284, 0.8988764), 0.0, 0.0, 0, 0, Vector2(0.497, 0.95), 0.0, 0.0, 0, 0, Vector2(0.57714283, 0.97752815), 0.0, 0.0, 0, 0, Vector2(0.67428565, 1), 0.0, 0.0, 0, 0, Vector2(0.7485714, 0.97752815), 0.0, 0.0, 0, 0, Vector2(0.82857144, 0.92134833), 0.0, 0.0, 0, 0, Vector2(0.91999996, 0.79775286), 0.0, 0.0, 0, 0, Vector2(1, 0.59550565), 0.0, 0.0, 0, 0]
-point_count = 13
-
 [node name="Test" type="Node3D" unique_id=1300905328]
 
 [node name="Lighting&Enviorment" type="Node3D" parent="." unique_id=705270786]
@@ -101,8 +97,6 @@ mesh = SubResource("BoxMesh_37kl0")
 
 [node name="Node3D" parent="Functional" unique_id=1475845789 instance=ExtResource("1_yhjd6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.8598504, 19.011797)
-mass = 950.0
-torque_curve = SubResource("Curve_yhjd6")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=317120203]
 transform = Transform3D(-0.626305, 0, -0.779579, 0, 1, 0, 0.779579, 0, -0.626305, -10.0349, 8.79027, -17.2665)

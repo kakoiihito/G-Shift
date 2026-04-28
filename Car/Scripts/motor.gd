@@ -2,6 +2,7 @@ extends Node
 
 func motor_process(delta: float, EngineData: RuntimeData.engine, TransmissionData: RuntimeData.transmission, WheelData: RuntimeData.wheels, Values: Resource) -> void:
 	
+	
 	var torque_curve = Values.torque_curve
 	var driven_count = EngineData.engine_driven_count
 	var drivetrain_ratio = TransmissionData.current_gear_ratio * Values.final_drive
