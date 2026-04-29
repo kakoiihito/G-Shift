@@ -249,54 +249,54 @@ VehicleValues = ExtResource("2_35f3q")
 wheels = [NodePath("WheelFrontLeft"), NodePath("WheelFrontRight"), NodePath("WheelRearLeft"), NodePath("WheelRearRight")]
 
 [node name="WheelFrontLeft" type="RayCast3D" parent="." unique_id=2052019363]
-transform = Transform3D(1.3996929, 0.029319387, 0, -0.029319387, 1.3996929, 0, 0, 0, 1.4, -1.25, 0.65, -2.0460312)
-target_position = Vector3(0, -0.4, 0)
+transform = Transform3D(1.3996929, 0.029319387, 0, -0.029319387, 1.3996929, 0, 0, 0, 1.4, -1.15, 0.65, -2.046)
+target_position = Vector3(0, -0.6, 0)
 debug_shape_custom_color = Color(0, 0, 1, 1)
 script = ExtResource("1_03rhi")
 
 [node name="FrontLeftWheel" type="Node3D" parent="WheelFrontLeft" unique_id=585656182]
 
 [node name="wheel_frontLeft" type="MeshInstance3D" parent="WheelFrontLeft/FrontLeftWheel" unique_id=1796671113]
-transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, 0)
+transform = Transform3D(-1, -1.8626451e-09, 0, -1.8626451e-09, 1, 0, 0, 0, 1, 0.19880885, 0, 0)
 mesh = SubResource("ArrayMesh_4a0rw")
 skeleton = NodePath("")
 
 [node name="WheelFrontRight" type="RayCast3D" parent="." unique_id=1038542688]
-transform = Transform3D(1.3996907, -0.029319348, 0.0024434598, 0.029319393, 1.3996929, 1.6996664e-11, -0.0024429238, 5.117195e-05, 1.3999978, 1.25, 0.65, -2.0460312)
-target_position = Vector3(0, -0.4, 0)
+transform = Transform3D(1.3996907, -0.029319348, 0.0024434598, 0.029319393, 1.3996929, 1.6996664e-11, -0.0024429238, 5.117195e-05, 1.3999978, 1.15, 0.65, -2.046)
+target_position = Vector3(0, -0.6, 0)
 debug_shape_custom_color = Color(0, 0, 1, 1)
 script = ExtResource("1_03rhi")
 
 [node name="FrontRightWheel" type="Node3D" parent="WheelFrontRight" unique_id=346997846]
 
 [node name="wheel_frontRight" type="MeshInstance3D" parent="WheelFrontRight/FrontRightWheel" unique_id=1402629533]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, 0)
+transform = Transform3D(1, 1.4123813e-09, 0, -4.5027093e-10, 1, 0, 1.1641532e-10, 0, 1, -0.19880891, 0, 0)
 mesh = SubResource("ArrayMesh_4a0rw")
 skeleton = NodePath("")
 
 [node name="WheelRearLeft" type="RayCast3D" parent="." unique_id=2031816737]
-transform = Transform3D(1.3993753, 0.04153249, -0.0048869126, -0.041532744, 1.3993838, 2.4175238e-11, 0.0048847618, 0.00014497632, 1.3999915, -1.25, 0.6, 2.2423851)
-target_position = Vector3(0, -0.4, 0)
+transform = Transform3D(1.3993753, 0.04153249, -0.0048869126, -0.041532744, 1.3993838, 2.4175238e-11, 0.0048847618, 0.00014497632, 1.3999915, -1.15, 0.6, 2.242)
+target_position = Vector3(0, -0.6, 0)
 debug_shape_custom_color = Color(0, 0, 1, 1)
 script = ExtResource("1_03rhi")
 
 [node name="RearLeftWheel" type="Node3D" parent="WheelRearLeft" unique_id=460100754]
 
 [node name="wheel_backLeft" type="MeshInstance3D" parent="WheelRearLeft/RearLeftWheel" unique_id=694878425]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.2, 0, 0)
+transform = Transform3D(-1.0000001, -1.902123e-09, -8.754432e-08, 4.8487436e-11, 1, -1.4551915e-11, 8.707866e-08, 7.275958e-12, -1.0000001, 0.19831276, 0, 1.1920929e-07)
 mesh = SubResource("ArrayMesh_4a0rw")
 skeleton = NodePath("")
 
 [node name="WheelRearRight" type="RayCast3D" parent="." unique_id=305259289]
-transform = Transform3D(1.3993753, 0.04153249, 0.0048869126, -0.041532744, 1.3993838, -2.4175238e-11, -0.0048847618, -0.00014497632, 1.3999915, 1.25, 0.6, 2.2423851)
-target_position = Vector3(0, -0.4, 0)
+transform = Transform3D(1.3993753, 0.04153249, 0.0048869126, -0.041532744, 1.3993838, -2.4175238e-11, -0.0048847618, -0.00014497632, 1.3999915, 1.15, 0.6, 2.242)
+target_position = Vector3(0, -0.6, 0)
 debug_shape_custom_color = Color(0, 0, 1, 1)
 script = ExtResource("1_03rhi")
 
 [node name="RearRightWheel" type="Node3D" parent="WheelRearRight" unique_id=1779066980]
 
 [node name="wheel_backRight" type="MeshInstance3D" parent="WheelRearRight/RearRightWheel" unique_id=1586398132]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20000005, 0, 0)
+transform = Transform3D(1.0000001, -1.902123e-09, 0, -3.942091e-11, 1, -7.275958e-12, -2.3283064e-10, -7.275958e-12, 1.0000001, -0.2016874, 0, 1.1920929e-07)
 mesh = SubResource("ArrayMesh_4a0rw")
 skeleton = NodePath("")
 

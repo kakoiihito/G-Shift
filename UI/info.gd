@@ -4,7 +4,7 @@ extends Control
 @export var car: Node3D
 var car_velocity: float
 
-func _process(_float) -> void:
+func _process(_delta: float) -> void:
 	
 	if car != null:
 		# Speed
@@ -16,5 +16,6 @@ func _process(_float) -> void:
 		
 		# RPM
 		var engine_rpm = car.engine.engine_rpm
+		
 		
 		info_label.text = "%d MPH | %d RPM | %d Gear" % [int(speed), int(engine_rpm), int(gear)]

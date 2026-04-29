@@ -1,8 +1,12 @@
 extends Node
 
-func brake_proccess(Data: RuntimeData.brake, Values: Resource) -> void:
+var input_brake := 0.0
+
+func brake_process(delta: float, Data: RuntimeData.brake, Values: Resource) -> void:
 	var brake_wheels = [Values.FL_torque_brake, Values.FR_torque_brake, Values.RL_torque_brake, Values.RR_torque_brake]
-	var input_brake = Input.get_action_strength("Brake")
+	var target_brake = Input.get_action_strength("Brake")
+	var brake_rate = 8.0 if target_brake > input_brake else 12.0
+	input_brake = move_toward(input_brake, target_brake, brake_rate * delta)
 
 	# Reset and recount active brake wheels each frame
 	Data.active_wheels_brake = 0

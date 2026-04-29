@@ -1,13 +1,17 @@
 extends Node
 
+var throttle_input: float
+
 func motor_process(delta: float, EngineData: RuntimeData.engine, TransmissionData: RuntimeData.transmission, WheelData: RuntimeData.wheels, Values: Resource) -> void:
 	
 	
 	var torque_curve = Values.torque_curve
 	var driven_count = EngineData.engine_driven_count
 	var drivetrain_ratio = TransmissionData.current_gear_ratio * Values.final_drive
-	
-	var throttle_input := Input.get_action_strength("Gas")
+	var target = Input.get_action_strength("Gas")
+	var rate = 4.0 if target > throttle_input else 8.0
+	throttle_input = move_toward(throttle_input, target, rate * delta)
+
 	
 	var clutch_input := Input.get_action_strength("Clutch")
 	var normalized = clamp((1.0 - clutch_input - 0.3) / 0.4, 0.0, 1.0)

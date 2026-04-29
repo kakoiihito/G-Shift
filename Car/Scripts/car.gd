@@ -73,7 +73,7 @@ func _physics_process(delta: float) -> void:
 	
 
 	Motor.motor_process(delta, engine, transmission, wheeldata, VehicleValues) # relies on wheel ang, transmission, and forces functions
-	Brake.brake_proccess(brake, VehicleValues) #relies on wheel angular velocity function
+	Brake.brake_process(delta, brake, VehicleValues) #relies on wheel angular velocity function
 	
 	Assists.abs_proccess(delta, brake, wheeldata, VehicleValues)  # relies on wheel forces and brake
 	Assists.tc_proccess(delta, engine, wheeldata, VehicleValues) # relies on wheel forces and motor

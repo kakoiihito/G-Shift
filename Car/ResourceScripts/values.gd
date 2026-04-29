@@ -133,29 +133,28 @@ var Stability = false
 
 @export_subgroup("Pacejka Longitudinal")
 @export var b0 = 1.5
-@export var b1 = -8.0
-@export var b2 = 1150.0
+@export var b1 = -5.0
+@export var b2 = 950.0
 @export var b3 = 0.0
-@export var b4 = 280.0
+@export var b4 = 170.0
 @export var b5 = 0.0
-@export var b6 = 0.0007
-@export var b7 = 0.005
+@export var b6 = 0.0008
+@export var b7 = 0.006
 @export var b8 = -2.0
 @export var b9 = 0.0
 @export var b10 = 0.0
 @export var b11 = 0.0
 @export var b12 = 0.0
 @export var b13 = 0.0
-
 @export_subgroup("Pacejka Lateral")
-@export var a0 = 1.75
-@export var a1 = -10.0
-@export var a2 = 1050.0
-@export var a3 = 850.0
-@export var a4 = 9.0
+@export var a0 = 1.70
+@export var a1 = -8.0
+@export var a2 = 900.0
+@export var a3 = 780.0
+@export var a4 = 6.5
 @export var a5 = 0.0
-@export var a6 = -0.08
-@export var a7 = -2.0
+@export var a6 = -0.10
+@export var a7 = -2.5
 @export var a8 = 0.0
 @export var a9 = 0.0
 @export var a10 = 0.0
@@ -166,36 +165,33 @@ var Stability = false
 @export var a15 = 0.0
 @export var a16 = 0.0
 @export var a17 = 0.0
-
 @export_subgroup("Aligning Torque")
-@export var Ro: float = 0.299
-@export var FNzo: float = 2.45
+@export var Ro: float = 0.287
+@export var FNzo: float = 2.0
 @export var ssz1: float = 0.0
-@export var ssz2: float = 0.05
+@export var ssz2: float = 0.06
 @export var ssz3: float = 0.0
 @export var ssz4: float = 0.0
 @export var lambda_s: float = 1.0
-@export var Br: float = 4.5
-@export var Cr: float = 1.0
-@export var Dr: float = 0.04
-@export var Bt: float = 10.0
-@export var Ct: float = 1.05
-@export var Dt: float = 0.028
-@export var Et: float = -1.0
-
+@export var Br: float = 7.0    
+@export var Cr: float = 1.1    
+@export var Dr: float = 0.08   
+@export var Bt: float = 14.0    
+@export var Ct: float = 1.25    
+@export var Dt: float = 0.07      
+@export var Et: float = -1.5    
 @export_subgroup("Pacejka Longitudinal G-Function")
-@export var rBx1 = 5.5
-@export var rBx2 = 9.0
+@export var rBx1 = 5.0
+@export var rBx2 = 8.0
 @export var rBx3 = 0.0
 @export var rCx1 = 1.05
-@export var rEx1 = -0.15
+@export var rEx1 = -0.25
 @export var rEx2 = 0.0
 @export var rHx1 = 0.0
 @export var lambda_xalpha = 1.0
-
 @export_subgroup("Pacejka Lateral G-Function")
-@export var rBy1 = 7.5
-@export var rBy2 = 2.8
+@export var rBy1 = 4.5
+@export var rBy2 = 2.0
 @export var rBy3 = 0.0
 @export var rBy4 = 0.0
 @export var rCy1 = 1.0
@@ -203,10 +199,10 @@ var Stability = false
 @export var rEy2 = 0.0
 @export var rHy1 = 0.0
 @export var rHy2 = 0.0
-@export var rVy1 = 0.0
+@export var rVy1 = 0.02
 @export var rVy2 = 0.0
 @export var rVy3 = 0.0
-@export var rVy4 = 4.0
+@export var rVy4 = 3.5
 @export var rVy5 = 1.9
 @export var rVy6 = 10.0
 @export var lambda_ykappa = 1.0
