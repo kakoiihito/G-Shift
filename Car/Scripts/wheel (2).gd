@@ -17,23 +17,21 @@ func _get_wheel_forces(ray: RayCast3D, WheelData: RuntimeData.wheels, Suspension
 	var wheel_surface_speed = WheelData.wheel_angular_velocity[wheel_index] * Values.wheel_radius
 	var Fz = SuspensionData.wheel_spring_force[wheel_index].length()
 	
-
+	# camber calc
 	
-
+	WheelData.camber  =(Values.camber_angles[wheel_index]) + (Values.camber_gain[wheel_index] * SuspensionData.compression[wheel_index])
 		
 	if ray.is_colliding():
-	
-		# camber calc
-	
-		WheelData.camber  =(Values.camber_angles[wheel_index]) + (Values.camber_gain[wheel_index] * SuspensionData.compression[wheel_index])
+		
+		var safe_speed = max(abs(forward_speed), 0.1)
 		
 		# slip angle calc
 		
-		WheelData.slip_angle[wheel_index] = -(atan(side_velocity / forward_speed))
+		WheelData.slip_angle[wheel_index] = -(atan2(side_velocity, safe_speed))
 		
 		# slip ratio calc
 		
-		WheelData.slip_ratio[wheel_index] = (wheel_surface_speed - forward_speed) / forward_speed
+		WheelData.slip_ratio[wheel_index] = (wheel_surface_speed - forward_speed) / safe_speed
 		var slip_ratio_percentage: float
 		slip_ratio_percentage = clamp(WheelData.slip_ratio[wheel_index] * 100.0, -100.0, 100.0)
 
@@ -42,17 +40,12 @@ func _get_wheel_forces(ray: RayCast3D, WheelData: RuntimeData.wheels, Suspension
 		
 		# pure longitudinal force calc
 		
-		var Fz_kN = Fz / 1000.0
 
-		var D = Fz_kN * (Values.b1 * Fz_kN + Values.b2)
-		var C = Values.b0
-		var BCD = (Values.b3 * pow(Fz_kN, 2) + Values.b4 * Fz_kN) * exp(-Values.b5 * Fz_kN)
-		var B = BCD / (C * D)
-		var H = Values.b9 * Fz_kN + Values.b10
-		var E = (Values.b6* pow(Fz_kN, 2) + Values.b7 * Fz_kN + Values.b8) *  (1 - Values.b13 * sign(slip_ratio_percentage+H))
-		var V = Values.b11 * Fz_kN + Values.b12
-		var Bx1 = B * (slip_ratio_percentage + H)
-		var Fxo = D * sin(C * atan(Bx1 - E * (Bx1 - atan(Bx1)))) + V
+		var De = 0.95
+		var Ce = 1.3
+		var Be = 10.0
+		var Ee = -0.5
+		var Fxo = Fz * De * sin(Ce * atan(Be * slip_ratio_percentage - Ee * (Be * slip_ratio_percentage - atan(Be * slip_ratio_percentage))))
 		
 		# combined slip longitudinal force calc
 		
@@ -66,55 +59,49 @@ func _get_wheel_forces(ray: RayCast3D, WheelData: RuntimeData.wheels, Suspension
 		var Gxa = cos(Cxa * atan(Bxa * alpha_s - Exa * (Bxa * alpha_s - atan(Bxa * alpha_s)))) / Gxa0
 
 		WheelData.longitude_force[wheel_index] = Gxa * Fxo
-
 		
 		# pure lateral force calc
+		
 
-		var C1 = Values.a0
-		var D1 = Fz_kN * (Values.a1 * Fz_kN + Values.a2) * (1 - Values.a15 * pow(WheelData.camber, 2))
-		var BCD1 = Values.a3 * sin(atan(Fz_kN / Values.a4) * 2) * (1 - Values.a5* abs(WheelData.camber))
-		var B1 = BCD1 / (C1 * D1)
-		var H1 = Values.a8 * Fz_kN + Values.a9 + Values.a10 * WheelData.camber
-		var E1 = (Values.a6 * Fz_kN + Values.a7) * (1 - (Values.a16 * WheelData.camber + Values.a17) * sign(WheelData.slip_angle[wheel_index] + H1))
-		var V1 = Values.a11 * Fz_kN + Values.a12 + (Values.a13 * Fz_kN + Values.a14) * WheelData.camber * Fz_kN
-		var Bx2 = B1 * (WheelData.slip_angle[wheel_index] + H1)
-		var Fyo = D1 * sin(C1 * atan(Bx2 - E1 * (Bx2 - atan(Bx2)))) + V1
+		var D1e = 0.95
+		var C1e = 1.3
+		var B1e = 10.0
+		var E1e = -0.5
+		var Fyo = Fz * D1e * sin(C1e * atan(B1e * WheelData.slip_angle[wheel_index] - E1e * (B1e * WheelData.slip_angle[wheel_index]  - atan(B1e * WheelData.slip_angle[wheel_index] ))))
 
 		# combined slip lateral force calc
 
-		var SHyk = Values.rHy1 + Values.rHy2 * dfz
-		var kappa_s = WheelData.slip_ratio[wheel_index] + SHyk
-		var Byk = (Values.rBy1 + Values.rBy4 * pow(WheelData.camber, 2)) * cos(atan(Values.rBy2 * (WheelData.slip_angle[wheel_index] - Values.rBy3))) * Values.lambda_ykappa
-		var Cyk = Values.rCy1
-		var Eyk = Values.rEy1 + Values.rEy2 * dfz
-		var Gyk0 = cos(Cyk * atan(Byk * SHyk - Eyk * (Byk * SHyk - atan(Byk * SHyk))))
-		var Gyk = cos(Cyk * atan(Byk * kappa_s - Eyk * (Byk * kappa_s - atan(Byk * kappa_s)))) / Gyk0
+		#var SHyk = Values.rHy1 + Values.rHy2 * dfz
+		#var kappa_s = slip_ratio_percentage + SHyk
+		#var Byk = (Values.rBy1 + Values.rBy4 * pow(WheelData.camber, 2)) * cos(atan(Values.rBy2 * (WheelData.slip_angle[wheel_index] - Values.rBy3))) * Values.lambda_ykappa
+		#var Cyk = Values.rCy1
+		#var Eyk = Values.rEy1 + Values.rEy2 * dfz
+		#var Gyk0 = cos(Cyk * atan(Byk * SHyk - Eyk * (Byk * SHyk - atan(Byk * SHyk))))
+		#var Gyk = cos(Cyk * atan(Byk * kappa_s - Eyk * (Byk * kappa_s - atan(Byk * kappa_s)))) / Gyk0
 
-		var mu_y = D1 / Fz_kN
-		var DVyk = mu_y * Fz * (Values.rVy1 + Values.rVy2 * dfz + Values.rVy3 * WheelData.camber) * cos(atan(Values.rVy4 * WheelData.slip_angle[wheel_index]))
-		var SVyk = DVyk * sin(Values.rVy5 * atan(Values.rVy6 * WheelData.slip_ratio[wheel_index])) * Values.lambda_Vyk
+		#var mu_y = D1 / Fz
+		#var DVyk = mu_y * Fz * (Values.rVy1 + Values.rVy2 * dfz + Values.rVy3 * WheelData.camber) * cos(atan(Values.rVy4 * WheelData.slip_angle[wheel_index]))
+		#var SVyk = DVyk * sin(Values.rVy5 * atan(Values.rVy6 * slip_ratio_percentage)) * Values.lambda_Vyk
 
 		WheelData.lateral_force[wheel_index] = Fyo
 		
-		print(WheelData.lateral_force)
-		
 		# aligning torque calc
 		
-		var stiffness_ratio_sq = pow(BCD/ BCD1, 2)
-		var kappa_sq = pow(slip_ratio_percentage, 2)
+		#var stiffness_ratio_sq = pow(BCD/ BCD1, 2)
+		#var kappa_sq = pow(slip_ratio_percentage, 2)
 		
-		var alpha_t_eq = sqrt(WheelData.slip_angle[wheel_index] * WheelData.slip_angle[wheel_index] + stiffness_ratio_sq * kappa_sq) * sign(WheelData.slip_angle[wheel_index])
-		var alpha_r_eq = sqrt(WheelData.slip_angle[wheel_index] * WheelData.slip_angle[wheel_index] + stiffness_ratio_sq * kappa_sq) * sign(WheelData.slip_angle[wheel_index])
+		#var alpha_t_eq = sqrt(WheelData.slip_angle[wheel_index] * WheelData.slip_angle[wheel_index] + stiffness_ratio_sq * kappa_sq) * sign(WheelData.slip_angle[wheel_index])
+		#var alpha_r_eq = sqrt(WheelData.slip_angle[wheel_index] * WheelData.slip_angle[wheel_index] + stiffness_ratio_sq * kappa_sq) * sign(WheelData.slip_angle[wheel_index])
 		
-		var s = Values.Ro * (Values.ssz1 + Values.ssz2 * (WheelData.lateral_force[wheel_index] / Fz_nominal_kN) + (Values.ssz3 + Values.ssz4 * dfz) * WheelData.camber) * Values.lambda_s
+		#var s = Values.Ro * (Values.ssz1 + Values.ssz2 * (WheelData.lateral_force[wheel_index] / Fz_nominal_kN) + (Values.ssz3 + Values.ssz4 * dfz) * WheelData.camber) * Values.lambda_s
 		
-		var Mzr = Values.Dr * cos(Values.Cr * atan(Values.Br * alpha_r_eq))
+		#var Mzr = Values.Dr * cos(Values.Cr * atan(Values.Br * alpha_r_eq))
 		
-		var trail = Values.Dt * cos(Values.Ct * atan(Values.Bt*alpha_t_eq - Values.Et * (Values.Bt*alpha_t_eq - atan(Values.Bt*alpha_t_eq)))) * cos(WheelData.slip_angle[wheel_index])
+		#var trail = Values.Dt * cos(Values.Ct * atan(Values.Bt*alpha_t_eq - Values.Et * (Values.Bt*alpha_t_eq - atan(Values.Bt*alpha_t_eq)))) * cos(WheelData.slip_angle[wheel_index])
 
-		var Mz_ = -trail * (WheelData.lateral_force[wheel_index] - SVyk)
+		#var Mz_ = -trail * (WheelData.lateral_force[wheel_index] - SVyk)
 		
-		#WheelData.aligning_torque[wheel_index] = (Mz_ + Mzr + s * WheelData.longitude_force[wheel_index])
+		#WheelData.aligning_torque[wheel_index] = (Mz_ + Mzr + s * WheelData.longitude_force[wheel_index]) * 1000.0
 		
 		# final force calc (aligning torque is applied in steering.gd)
 		
