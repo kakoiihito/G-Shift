@@ -11,16 +11,22 @@ func brake_process(delta: float, Data: RuntimeData.brake, Values: Resource) -> v
 	# Reset and recount active brake wheels each frame
 	Data.active_wheels_brake = 0
 	for i in range(4):
-		if brake_wheels[i] == true:
+		if brake_wheels[i]:
 			Data.active_wheels_brake += 1
-
+	
 	if Data.active_wheels_brake == 0:
 		return
-
-	if Data.input_brake > 0.0:
-		Data.brake_torque = (Data.input_brake * Values.max_brake_torque) / Data.active_wheels_brake
+	
+	# dont calculate brake torque if no input.
+	if Data.input_brake <= 0.0:
 		for i in range(4):
-			if brake_wheels[i] == true and Data.abs_active[i] == false:
-				Data.wheel_brake_torque[i] = Data.brake_torque
-			else:
-				Data.wheel_brake_torque[i] = 0.0  # ABS pulse or inactive wheel
+			Data.wheel_brake_torque[i] = 0.0
+		return
+	
+	# brake torque calculation
+	Data.brake_torque = (Data.input_brake * Values.max_brake_torque) / Data.active_wheels_brake
+	for i in range(4):
+		if brake_wheels[i] and Data.abs_active[i] == false:
+			Data.wheel_brake_torque[i] = Data.brake_torque
+		else:
+			Data.wheel_brake_torque[i] = 0.0

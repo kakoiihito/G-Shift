@@ -42,7 +42,7 @@ extends Resource
 	###################
 	
 @export_group("Brake")
-@export var max_brake_torque = 1350.0
+@export var max_brake_torque = 950.0
 
 	#####################
 	# ASSISTS VARIABLES #
