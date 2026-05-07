@@ -1,19 +1,18 @@
-# Contribution to The G-Shift Project
+# Contribution to The Shift Project
  
->Thank you for taking your time to contribute to G-Shift. Future contributors like you make G-Shift an amazing project.
+>Thank you for taking your time to contribute to Shift. Future contributors like you make Shift an amazing project.
 >
 >These guidelines will help you respect the developer creating this open source project. In return, they should give
 >that respect in addressing your issue, discussing changes, and helping you with your pull requests.
 >
 > Contributions to this project are ruled under the Code of Conduct
 >
-> (https://github.com/kakoiihito/G-Shift/blob/main/CODE_OF_CONDUCT.md)
+> (https://github.com/kakoiihito/Shift/blob/main/CODE_OF_CONDUCT.md)
 
 # Ways To Contribute
 
-> There are many ways to contribute to the G-Shift Project. Contributers like you can make tutorials, improve the
-> documentation, find bugs, report them, and sumbit feature requests or code which could be added into
-> G-Shift's code.
+> There are many ways to contribute to the Shift Project. Contributers like you can make tutorials, improve the
+> documentation, find bugs, report them, and sumbit feature requests or code which could be added.
 
 # Issues Tab
 
@@ -25,7 +24,7 @@
 > 
 > * Keep features to one new feature per request.
 > * Create issues for any major changes and enhancements that you wish to make. Discuss things transparently and get community feedback.
-> * Follow the Code of Conduct (https://github.com/kakoiihito/G-Shift/blob/main/CODE_OF_CONDUCT.md).
+> * Follow the Code of Conduct (https://github.com/kakoiihito/Shift/blob/main/CODE_OF_CONDUCT.md).
 > * Make sure that another contributor hasn't already attempted to request your contribution.
 
 # First Time Contributors
@@ -33,6 +32,9 @@
 > Don't know where to start? Try looking into Issues for problems to solve.
 > Discuss contributions with other contributers.
 > Try to understand the code and find something to add or fix.
+> See if documentation could be added or more clear.
+> Make tutorials.
+> Help get the word out about this project.
 
 # Getting Started
 
@@ -45,7 +47,7 @@
 
 > When filing a bug report follow these steps.
 > * What version of Godot are you using?
-> * Are you using a custom version of Godot?
+> * Are you using a custom install of Godot?
 > * What is your operating system and architecture?
 > * What did you do?
 > * What did you expect?
