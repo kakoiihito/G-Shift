@@ -1,4 +1,4 @@
-## G-Shift: Godot's Advanced Vehicle Simulator
+## Shift: Godot's Advanced Vehicle Simulator
 
 
   ### Overview
