@@ -20,7 +20,7 @@
   > * Anti Lock Brake Simulation
   > * Traction Control Simulation
   > * Ackermman Steering Model
-  > * 240 Hz Based Project
+  > * 120 Hz Tick Rate Project
 
   ### Usage
 
