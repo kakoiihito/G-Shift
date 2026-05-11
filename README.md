@@ -1,5 +1,6 @@
 ## Shift: Godot's Advanced 4-Wheeler Vehicle Simulator
 
+<img width="2246" height="1260" alt="thumb" src="https://github.com/user-attachments/assets/6edf997e-7d19-409e-8a0b-8129bf42f6ca" />
 
   ### Overview
 
